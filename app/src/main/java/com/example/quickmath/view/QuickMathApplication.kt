@@ -4,9 +4,9 @@ import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 /**
- * Quick math application
+ * Quick math application.
  *
  * @constructor Create empty Quick math application
  */
 @HiltAndroidApp
-class QuickMathApplication: Application()
+class QuickMathApplication : Application()

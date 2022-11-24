@@ -29,10 +29,13 @@ import com.example.quickmath.R
 import com.example.quickmath.ui.theme.QuickMathTheme
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Dashboard fragment entry point displays initial screen for user.
+ *
+ * @constructor Create empty Dashboard fragment
+ */
 @AndroidEntryPoint
 class DashboardFragment : Fragment() {
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -48,9 +51,7 @@ class DashboardFragment : Fragment() {
         return ComposeView(requireActivity()).apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
-
                 QuickMathTheme {
-
                     Surface(modifier = Modifier.fillMaxSize()) {
                         Box(
                             modifier = Modifier.padding(2.dp),
@@ -71,10 +72,8 @@ class DashboardFragment : Fragment() {
                             }
                         }
                     }
-
                 }
             }
         }
     }
 }
-

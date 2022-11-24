@@ -13,7 +13,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,22 +31,21 @@ import com.example.quickmath.R
 import com.example.quickmath.ui.theme.QuickMathTheme
 import com.example.quickmath.viewmodel.MathViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+/**
+ * Second input fragment where teh second number is registered form the user.
+ *
+ * @constructor Create empty Second input fragment
+ */
 @AndroidEntryPoint
 class SecondInputFragment : Fragment() {
     val input by lazy { arguments?.getString("numb1") }
     val operator by lazy { arguments?.getString("operator") }
     val viewModel by activityViewModels<MathViewModel>()
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        println("INPUT $input")
-        println("OPERTOR $operator")
-
     }
 
     @OptIn(ExperimentalMaterial3Api::class)
@@ -61,9 +59,7 @@ class SecondInputFragment : Fragment() {
         return ComposeView(requireActivity()).apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
-
                 QuickMathTheme {
-
                     Surface(modifier = Modifier.fillMaxSize()) {
                         Box(
                             modifier = Modifier.padding(2.dp),
@@ -77,13 +73,15 @@ class SecondInputFragment : Fragment() {
                                 TextField(value = inputB, onValueChange = { inputB = it })
                                 Button(onClick = {
                                     println("input IS $input $operator AND INPUTB: $inputB")
-                                     val args3:Bundle = bundleOf(
-                                         "numb1" to input,
-                                         "operator" to operator,
-                                         "numb2" to inputB
-                                     )
-                                    lifecycleScope.launch { val result = viewModel.evaluateExpression("$input$operator$inputB")
-                                    println(result)
+                                    val args3: Bundle = bundleOf(
+                                        "numb1" to input,
+                                        "operator" to operator,
+                                        "numb2" to inputB
+                                    )
+                                    lifecycleScope.launch {
+                                        viewModel.evaluateExpression(
+                                            "$input$operator$inputB"
+                                        )
                                     }
                                     findNavController().navigate(R.id.resultFragment, args3)
                                 }) {
@@ -97,4 +95,3 @@ class SecondInputFragment : Fragment() {
         }
     }
 }
-

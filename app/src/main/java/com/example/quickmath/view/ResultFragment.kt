@@ -13,30 +13,22 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.unit.dp
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.example.quickmath.R
 import com.example.quickmath.ui.theme.QuickMathTheme
 import com.example.quickmath.viewmodel.MathViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 /**
- * Result fragment
+ * Result fragment displays result retrieved from api.
  *
  * @constructor Create empty Result fragment
  */
@@ -59,7 +51,6 @@ class ResultFragment : Fragment() {
         return ComposeView(requireActivity()).apply {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
-
                 QuickMathTheme {
                     Surface(modifier = Modifier.fillMaxSize()) {
                         Box(
@@ -67,12 +58,17 @@ class ResultFragment : Fragment() {
                             contentAlignment = Alignment.Center
                         ) {
                             Column() {
-                                Text(text = context.getString(R.string.resultText), modifier = Modifier.padding(vertical = 20.dp))
+                                Text(
+                                    text = context.getString(R.string.resultText),
+                                    modifier = Modifier.padding(
+                                        vertical = 20.dp
+                                    )
+                                )
                                 val result = viewModel.result.collectAsState().value
                                 Text(text = "= $result")
                                 Row() {
                                     Button(onClick = {
-                                        findNavController().popBackStack(R.id.dashboardFragment, true)
+                                        findNavController().popBackStack(R.id.dashboardFragment, false)
                                     }) {
                                         Text(text = "Home")
                                     }
@@ -80,10 +76,8 @@ class ResultFragment : Fragment() {
                             }
                         }
                     }
-
                 }
             }
         }
     }
 }
-
