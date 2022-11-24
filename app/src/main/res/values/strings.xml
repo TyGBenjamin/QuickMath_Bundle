@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">QuickMath</string>
+    <string name="resultText">Result Shown Below</string>
+</resources>

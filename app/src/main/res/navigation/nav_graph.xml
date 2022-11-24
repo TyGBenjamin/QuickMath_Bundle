@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/dashboardFragment">
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.example.quickmath.view.DashboardFragment"
+        android:label="DashboardFragment" >
+        <action
+            android:id="@+id/action_dashboardFragment_to_operatorFragment"
+            app:destination="@id/operatorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/operatorFragment"
+        android:name="com.example.quickmath.view.OperatorFragment"
+        android:label="OperatorFragment" >
+        <action
+            android:id="@+id/action_operatorFragment_to_secondInputFragment"
+            app:destination="@id/secondInputFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/secondInputFragment"
+        android:name="com.example.quickmath.view.SecondInputFragment"
+        android:label="SecondInputFragment" >
+        <action
+            android:id="@+id/action_secondInputFragment_to_resultFragment"
+            app:destination="@id/resultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.example.quickmath.view.ResultFragment"
+        android:label="ResultFragment" >
+        <action
+            android:id="@+id/action_resultFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
+    </fragment>
+</navigation>
